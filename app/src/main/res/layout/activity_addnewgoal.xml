@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".addnewgoal"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="79dp">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="117dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="140dp"
+        android:text="GOAL is to Study"
+        android:textSize="14sp"
+        app:autoSizeMaxTextSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/goal_chapter"
+        android:layout_width="137dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="132dp"
+        android:hint="ChapterX SectionX"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nbofhours"
+        android:layout_width="79dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:hint="nb of hours"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/goal_chapter" />
+
+    <EditText
+        android:id="@+id/CNAME"
+        android:layout_width="88dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:hint="CourseName"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_chapter" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="67dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        android:text="Hour/s"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/nbofhours"
+        app:layout_constraintTop_toBottomOf="@+id/goal_chapter" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="17dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="28dp"
+        android:text="in"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/nbofhours"
+        app:layout_constraintStart_toEndOf="@+id/CNAME"
+        app:layout_constraintTop_toBottomOf="@+id/goal_chapter" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="33dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="136dp"
+        android:text="of"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/goal_chapter"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="181dp"
+        android:layout_height="196dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="140dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nbofhours"
+        app:srcCompat="@drawable/goal" />
+
+    <Button
+        android:id="@+id/add1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="16dp"
+        android:text="Add new Goal"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
