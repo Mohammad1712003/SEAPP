@@ -33,6 +33,8 @@ Button Signout;
                   openhomepage(view);
                 if(position==1)
                     openGoals(view);
+                if(position==2)
+                    openStatuspage(view);
             }
 
         });
@@ -66,6 +68,10 @@ Button Signout;
 
     }
 
+    public void openStatuspage(View v){
+        Intent i= new Intent(this, status1.class);
 
+        startActivity(i);
+    }
 
 }

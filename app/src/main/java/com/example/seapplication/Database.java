@@ -30,6 +30,9 @@ public class Database extends SQLiteOpenHelper {
         String createGoals_Table = "CREATE TABLE " + GOALS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + GOAL_NAME + " TEXT, " + COURSE_NAME + " TEXT, " + DURATION + " INTEGER)";
         sqLiteDatabase.execSQL(createGoals_Table);
 
+//        String createGoals_Table = "CREATE TABLE " + GOALS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + GOAL_NAME + " TEXT, " + COURSE_NAME + " TEXT, " + DURATION + " INTEGER)";
+//        sqLiteDatabase.execSQL(createGoals_Table);
+
     }
 
     //ACC TABLE
@@ -192,27 +195,42 @@ public class Database extends SQLiteOpenHelper {
         long insert = db_main.insert(GOALS_TABLE, null, cv_main);
         return true;
     }
-/*
+
     public boolean AccomplishGoal( String toString){
 
-        ArrayList<String> arrayList=getallGoals();
+        ArrayList<GOAL_CLASS> arrayList=getallGoals();
         GOAL_CLASS g;
+        int index=-1;
         for(int i=0;i<arrayList.size();i++){
-            if(arrayList.get(i).equals(toString) {
-
+            if(arrayList.get(i).toString().equals(toString)){
+                index=i;
                 break;
             }
-
         }
+        /*
         SQLiteDatabase db=this.getWritableDatabase();
-        String qureyString="DELETE FROM "+GOALS_TABLE+ " WHERE "+COLUMN_ID + "="+ products.getId();
+        String qureyString="DELETE FROM "+GOALS_TABLE+ " WHERE "+GOAL_NAME + " = "+ arrayList.get(index).getGOAL();
+                //+" and "+COURSE_NAME+"="+arrayList.get(index).getCourse() +" and "+DURATION+"="+arrayList.get(index).getDuration();
         Cursor cursor=db.rawQuery(qureyString,null);
         if(cursor.moveToFirst())
             return true;
         else
             return false;
+        */
+    /////////////////
+
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cvcc=new ContentValues();
+        index++;
+        long del=db.delete(GOALS_TABLE, "ID=?" , new String[]{index+""});
+
+        if(del==-1)
+            return false;
+        else
+            return true;
+
     }
-*/
+
 
     public boolean CHECK_IF_ACC_EXISTS(ACCOUNTS acc) {
 

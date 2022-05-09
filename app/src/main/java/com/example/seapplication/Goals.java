@@ -101,6 +101,7 @@ public class Goals extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                    // alertview.setVisibility(View.VISIBLE);
+                                    DB.AccomplishGoal(goalss.get(index).toString());
                                     Toast.makeText(Goals.this, "YAYYY", Toast.LENGTH_SHORT).show();
 
                                 }
