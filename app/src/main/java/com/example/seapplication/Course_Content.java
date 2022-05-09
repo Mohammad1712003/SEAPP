@@ -58,6 +58,16 @@ public class Course_Content extends AppCompatActivity {
                 openSigninpage(v);
 
             }});
+
+        Menu.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                 openMenupage(v);
+
+
+            }
+        });
     }
 
 
@@ -73,4 +83,11 @@ public class Course_Content extends AppCompatActivity {
         startActivity(i);
 
     }
+    public void openMenupage(View v) {
+        Intent i = new Intent(this, Menu.class);
+
+        startActivity(i);
+
+    }
+
 }

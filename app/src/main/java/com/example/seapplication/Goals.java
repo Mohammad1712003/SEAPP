@@ -120,7 +120,7 @@ public class Goals extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // openMenupage(v);
+                 openMenupage(v);
 
 
             }

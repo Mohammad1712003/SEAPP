@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean success = DB.CHECK_IF_ACC_EXISTS(accounts);
                 if (success==true){
+                    DB.setcur_signed_in(accounts.getUSERNAME());
                     Toast.makeText(MainActivity.this, "successfully signed in", Toast.LENGTH_SHORT).show();
                   openhomepage(v);
                 }

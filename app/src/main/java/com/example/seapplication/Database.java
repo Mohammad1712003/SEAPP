@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Database extends SQLiteOpenHelper {
 
     public Database(@Nullable Context context) {
-        super(context, "S_E_D__B.db", null, 2);
+        super(context, "SE___DB.db", null, 2);
     }
 
     @Override
@@ -27,6 +27,9 @@ public class Database extends SQLiteOpenHelper {
 
         String createCOURSES_Table = "CREATE TABLE " + COURSES_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + C_NAME + " TEXT UNIQUE, " + C_TITLE + " TEXT, " + C_SECTION + " TEXT," + I_NAME + " TEXT)";
         sqLiteDatabase.execSQL(createCOURSES_Table);
+
+        String createAcc_Takes_Courses_Table = "CREATE TABLE ACC_TAKES_COURSES_TABLE ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT, " + PASSWORD + " TEXT, "+C_NAME + " TEXT UNIQUE, " + C_TITLE + " TEXT, " + C_SECTION + " TEXT, " + I_NAME + " TEXT)";
+        sqLiteDatabase.execSQL(createAcc_Takes_Courses_Table);
 
         String createGoals_Table = "CREATE TABLE " + GOALS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + GOAL_NAME + " TEXT, " + COURSE_NAME + " TEXT, " + DURATION + " INTEGER)";
         sqLiteDatabase.execSQL(createGoals_Table);
@@ -39,6 +42,10 @@ public class Database extends SQLiteOpenHelper {
 
         String createcurr_Table = "CREATE TABLE CUR_TABLE ( ID INTEGER PRIMARY KEY AUTOINCREMENT, CUR_COURSE_NAME TEXT)";
         sqLiteDatabase.execSQL(createcurr_Table);
+
+        String createcurrSignedin_Table = "CREATE TABLE CUR_SIGNED_IN_TABLE ( ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT)";
+        sqLiteDatabase.execSQL(createcurrSignedin_Table);
+
     }
 
     //ACC TABLE
@@ -152,9 +159,9 @@ public class Database extends SQLiteOpenHelper {
         insert = db_main.insert(GOALS_TABLE, null, cv_main2);
 
         cv_main2.put("ID", 5);
-        cv_main2.put(GOAL_NAME, "ch8 sec3");
-        cv_main2.put(COURSE_NAME, "CSC447");
-        cv_main2.put(DURATION, 3);
+        cv_main2.put(GOAL_NAME, "ch9 sec3");
+        cv_main2.put(COURSE_NAME, "CSC490");
+        cv_main2.put(DURATION, 1);
         insert = db_main.insert(GOALS_TABLE, null, cv_main2);
         //*********************************************************************************//
 
@@ -256,22 +263,28 @@ public class Database extends SQLiteOpenHelper {
         insert = db_main.insert(COURSE_HAS_CHAPTER_TABLE, null, cv_main4);
 
 
+        COURSE_HAS_CHAPTER(new Course(4, "CSC458", "Game Programming", "15", " Hussein Bakri"),
+                new Chapter("CH20 FULL ", 1.0f, 0.0f));
+        COURSE_HAS_CHAPTER(new Course(5, "CSC458", "Game Programming", "15", " Hussein Bakri"),
+                new Chapter("CH8 SEC1+SEC2 ", 2.0f, 0.0f));
+        COURSE_HAS_CHAPTER(new Course(6, "CSC458", "Game Programming", "15", " Hussein Bakri"),
+                new Chapter("CH2 SEC1 ", 1.1f, 0.0f));
+        COURSE_HAS_CHAPTER(new Course(7, "COM203", "Communication and Speeches", "20", "Walaa Harb"),
+                new Chapter("CH7 SEC1 ", 1.3f, 0.0f));
+        COURSE_HAS_CHAPTER(new Course(8, "COM203", "Communication and Speeches", "20", "Walaa Harb"),
+                new Chapter("CH3 SEC1+SEC2 ", 2.0f, 0.0f));
+
+        STUDENT_TAKES_COURSE(new Course(1, "CSC458", "Game Programming", "15", " Hussein Bakri"), new ACCOUNTS("John123", "johnsmith"));
+        STUDENT_TAKES_COURSE(new Course(2, "CSC447", "Parallel course", "10", " Karim Jahed"), new ACCOUNTS("Johan123", "johnsmith"));
+        STUDENT_TAKES_COURSE(new Course(3, "CSC490", "SOftware Engineering", "12", "Khaleel Mershad"), new ACCOUNTS("John123", "johnsmith"));
+        STUDENT_TAKES_COURSE(new Course(4, "COM203", "Communication and Speeches", "20", "Walaa Harb"), new ACCOUNTS("Ema16", "16_8_2001"));
+        STUDENT_TAKES_COURSE(new Course(5, "ENG202", "Advanced English", "22", "Randa keidy"), new ACCOUNTS("Ema16", "16_8_2001"));
 
 
-        COURSE_HAS_CHAPTER(new Course(4,"CSC458","Game Programming","15"," Hussein Bakri"),
-                new Chapter("CH20 FULL ",1.0f,0.0f));
-        COURSE_HAS_CHAPTER(new Course(5,"CSC458","Game Programming","15"," Hussein Bakri"),
-                new Chapter("CH8 SEC1+SEC2 ",2.0f,0.0f));
-        COURSE_HAS_CHAPTER(new Course(6,"CSC458","Game Programming","15"," Hussein Bakri"),
-                new Chapter("CH2 SEC1 ",1.1f,0.0f));
-        COURSE_HAS_CHAPTER(new Course(7,"COM203","Communication and Speeches","20","Walaa Harb"),
-                new Chapter("CH7 SEC1 ",1.3f,0.0f));
-        COURSE_HAS_CHAPTER(new Course(8,"COM203","Communication and Speeches","20","Walaa Harb"),
-                new Chapter("CH3 SEC1+SEC2 ",2.0f,0.0f));
 
     }
 
-    public void setcur_course_name(String c_name){
+    public void setcur_course_name(String c_name) {
         SQLiteDatabase db_main = this.getWritableDatabase();
         ContentValues cv_main = new ContentValues();
         cv_main.put("CUR_COURSE_NAME", c_name);
@@ -284,26 +297,49 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int i = 0;
         Cursor cursor = db.rawQuery(queryString, null);
-        String cur_name="";
+        String cur_name = "";
         if (cursor.moveToFirst()) {
             do {
-                 cur_name = cursor.getString(1);
+                cur_name = cursor.getString(1);
                 i++;
             } while (cursor.moveToNext());
         }
         return cur_name;
     }
 
-    public ArrayList<String> getallcourses() {
+    public void setcur_signed_in(String name) {
+        SQLiteDatabase db_main = this.getWritableDatabase();
+        ContentValues cv_main = new ContentValues();
+        cv_main.put("USERNAME", name);
+        long insert = db_main.insert("CUR_SIGNED_IN_TABLE", null, cv_main);
+    }
+
+    public String getcur_signed_in() {
+
+        String queryString = "SELECT * FROM CUR_SIGNED_IN_TABLE";
+        SQLiteDatabase db = this.getReadableDatabase();
+        int i = 0;
+        Cursor cursor = db.rawQuery(queryString, null);
+        String cur_username = "";
+        if (cursor.moveToFirst()) {
+            do {
+                cur_username = cursor.getString(1);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        return cur_username;
+    }
+
+    public ArrayList<String> getallcourses(String username) {
         ArrayList<String> name = new ArrayList<String>();
-        String queryString = "SELECT * FROM " + COURSES_TABLE;
+        String queryString = "SELECT * FROM ACC_TAKES_COURSES_TABLE WHERE USERNAME= '"+username+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         int i = 0;
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
 
-                String cur_name = cursor.getString(1);
+                String cur_name = cursor.getString(3);
                 name.add(cur_name);
                 i++;
             } while (cursor.moveToNext());
@@ -334,7 +370,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> getcourse_chapters() {
-        String coursename=getcur_course_name();
+        String coursename = getcur_course_name();
         ArrayList<String> list = new ArrayList<String>();
         String queryString = "SELECT * FROM " + COURSE_HAS_CHAPTER_TABLE + " WHERE C_NAME='" + coursename + "';";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -477,7 +513,7 @@ public class Database extends SQLiteOpenHelper {
 
             ContentValues cvv = new ContentValues();
 
-            cvv.put("ID",course.getID());
+            cvv.put("ID", course.getID());
             cvv.put(C_NAME, course.getC_NAME());
             cvv.put(C_TITLE, course.getC_TITLE());
             cvv.put(C_SECTION, course.getC_SECTION());
@@ -491,6 +527,64 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+    public void STUDENT_TAKES_COURSE(Course course, ACCOUNTS account){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        // make sure that the course inputted exists in th DB
+        String queryString = "SELECT * FROM " + COURSES_TABLE;
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery(queryString, null);
+
+
+        String course_name = "";
+        if (cursor.moveToFirst()) {
+            do {
+                course_name = cursor.getString(1);
+
+                if (course_name.equalsIgnoreCase(course.getC_NAME())) {
+                    break;
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // make sure that the chapter inputted exists in the DB
+        String queryString2 = "SELECT * FROM " + ACCOUNTS_TABLE;
+        SQLiteDatabase DBB = this.getReadableDatabase();
+        Cursor cursor2 = DBB.rawQuery(queryString2, null);
+
+        String Account = "";
+
+        if (cursor2.moveToFirst()) {
+            do {
+                Account = cursor2.getString(1);
+                if (Account.equalsIgnoreCase(account.getUSERNAME())) {
+                    break;
+                }
+
+            } while (cursor2.moveToNext());
+        }
+        if ((course_name.equalsIgnoreCase(course.getC_NAME())) && Account.equalsIgnoreCase(account.getUSERNAME())) {
+            Cursor cursor3 = DB.rawQuery(queryString2, null);
+            ContentValues cvvv = new ContentValues();
+
+
+            ContentValues cvv = new ContentValues();
+
+            cvv.put("ID", course.getID());
+            cvv.put(C_NAME, course.getC_NAME());
+            cvv.put(C_TITLE, course.getC_TITLE());
+            cvv.put(C_SECTION, course.getC_SECTION());
+            cvv.put(I_NAME, course.getI_NAME());
+            cvv.put(USERNAME, account.getUSERNAME());
+            cvv.put(PASSWORD, account.getPASSWORD());
+
+
+            db.insert("ACC_TAKES_COURSES_TABLE", null, cvv);
+
+        }
+    }
+
 
 }
 

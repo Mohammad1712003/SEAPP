@@ -13,10 +13,13 @@
         android:theme="@style/Theme.SEApplication">
         <activity
             android:name=".Course_Content"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".homepage"
+            />
         <activity
             android:name=".status1"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Course_Content"/>
         <activity
             android:name=".addnewgoal"
             android:exported="false"

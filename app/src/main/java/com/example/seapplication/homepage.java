@@ -31,7 +31,7 @@ Button Menu,Signout;
 
 
 Database DB=new Database(homepage.this);
-        ArrayList names=DB.getallcourses();
+        ArrayList names=DB.getallcourses(DB.getcur_signed_in());
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(this,  R.layout.activity_rowsforlistview, R.id.list_item,names);
 lv.setAdapter(itemsAdapter);
