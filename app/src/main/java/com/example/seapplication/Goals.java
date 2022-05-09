@@ -59,7 +59,7 @@ public class Goals extends AppCompatActivity {
 
         }
         Database DB = new Database(Goals.this);
-        ArrayList<GOAL_CLASS> goalss = DB.getallGoals();
+        ArrayList<GOAL_CLASS> goalss = DB.getallGoals(DB.getcur_signed_in());
         ArrayList<String> goalstostring=new ArrayList<String>();
 
         for(int i=0;i<goalss.size();i++){
