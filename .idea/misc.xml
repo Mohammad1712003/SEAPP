@@ -3,17 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/drawable/circle.xml" value="0.235" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/drawable/circle2.xml" value="0.199" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/drawable/courses.xml" value="0.235" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_addnewgoal.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_goals.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_homepage.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_rowsforlistview.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_status.xml" value="0.264" />
-        <entry key="..\:/Users/LENOVO/Desktop/SEapplication/app/src/main/res/layout/activity_status1.xml" value="0.24479166666666666" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_addnewgoal.xml" value="0.36" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_course_content.xml" value="0.132" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_goals.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_home.xml" value="0.18493150684931506" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_homepage.xml" value="0.2" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_main.xml" value="0.3" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_menu.xml" value="0.2" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_notification.xml" value="0.132" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_rowsforlistview.xml" value="0.3" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/activity_scrolling.xml" value="0.3" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/fragment_home.xml" value="0.187890625" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/fragment_notifications.xml" value="0.187890625" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/layout/nav_header.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/menu/menu_scrolling.xml" value="0.187890625" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/menu/nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/SEapplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935" />
       </map>
     </option>
   </component>

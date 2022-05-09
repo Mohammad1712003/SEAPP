@@ -14,8 +14,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
+
     public Database(@Nullable Context context) {
-        super(context, "S_E_D_B.db", null, 2);
+        super(context, "S_E_D__B.db", null, 2);
     }
 
     @Override
@@ -33,8 +34,11 @@ public class Database extends SQLiteOpenHelper {
         String createChapters_Table = "CREATE TABLE " + CHAPTERS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + CHAPTER_NAME + " TEXT UNIQUE, " + REQUIRED_NB_OF_HOURS + " FLOAT, " + NB_OF_STUDIED_HOURS + " FLOAT)";
         sqLiteDatabase.execSQL(createChapters_Table);
 
-        String createCOURSES_HAS_CHAPTER_Table = "CREATE TABLE " + COURSE_HAS_CHAPTER_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + C_NAME + " TEXT UNIQUE, " + C_TITLE + " TEXT, " + C_SECTION + " TEXT," + I_NAME + " TEXT, " + CHAPTER_NAME + " TEXT UNIQUE, " + REQUIRED_NB_OF_HOURS + " FLOAT, " + NB_OF_STUDIED_HOURS + " FLOAT)";
+        String createCOURSES_HAS_CHAPTER_Table = "CREATE TABLE " + COURSE_HAS_CHAPTER_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + C_NAME + " TEXT, " + C_TITLE + " TEXT, " + C_SECTION + " TEXT," + I_NAME + " TEXT, " + CHAPTER_NAME + " TEXT, " + REQUIRED_NB_OF_HOURS + " FLOAT, " + NB_OF_STUDIED_HOURS + " FLOAT)";
         sqLiteDatabase.execSQL(createCOURSES_HAS_CHAPTER_Table);
+
+        String createcurr_Table = "CREATE TABLE CUR_TABLE ( ID INTEGER PRIMARY KEY AUTOINCREMENT, CUR_COURSE_NAME TEXT)";
+        sqLiteDatabase.execSQL(createcurr_Table);
     }
 
     //ACC TABLE
@@ -217,6 +221,77 @@ public class Database extends SQLiteOpenHelper {
         cv_main3.put(REQUIRED_NB_OF_HOURS, 1.3);
         cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
         insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        //Course_has_Chapters
+
+        ContentValues cv_main4 = new ContentValues();
+        cv_main4.put(C_NAME, "CSC490");
+        cv_main4.put(C_TITLE, "SOftware Engineering");
+        cv_main4.put(C_SECTION, "12");
+        cv_main4.put(I_NAME, "Khaleel Mershad");
+        cv_main4.put("ID", 1);
+        cv_main4.put(CHAPTER_NAME, "CH1 SEC1 ");
+        cv_main4.put(REQUIRED_NB_OF_HOURS, 1.0);
+        cv_main4.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(COURSE_HAS_CHAPTER_TABLE, null, cv_main4);
+
+        cv_main4.put(C_NAME, "CSC490");
+        cv_main4.put(C_TITLE, "SOftware Engineering");
+        cv_main4.put(C_SECTION, "12");
+        cv_main4.put(I_NAME, "Khaleel Mershad");
+        cv_main4.put("ID", 2);
+        cv_main4.put(CHAPTER_NAME, "CH1 SEC2 ");
+        cv_main4.put(REQUIRED_NB_OF_HOURS, 1.5);
+        cv_main4.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(COURSE_HAS_CHAPTER_TABLE, null, cv_main4);
+
+        cv_main4.put(C_NAME, "CSC490");
+        cv_main4.put(C_TITLE, "SOftware Engineering");
+        cv_main4.put(C_SECTION, "12");
+        cv_main4.put(I_NAME, "Khaleel Mershad");
+        cv_main4.put("ID", 3);
+        cv_main4.put(CHAPTER_NAME, "CH20 FULL ");
+        cv_main4.put(REQUIRED_NB_OF_HOURS, 1.0);
+        cv_main4.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(COURSE_HAS_CHAPTER_TABLE, null, cv_main4);
+
+
+
+
+        COURSE_HAS_CHAPTER(new Course(4,"CSC458","Game Programming","15"," Hussein Bakri"),
+                new Chapter("CH20 FULL ",1.0f,0.0f));
+        COURSE_HAS_CHAPTER(new Course(5,"CSC458","Game Programming","15"," Hussein Bakri"),
+                new Chapter("CH8 SEC1+SEC2 ",2.0f,0.0f));
+        COURSE_HAS_CHAPTER(new Course(6,"CSC458","Game Programming","15"," Hussein Bakri"),
+                new Chapter("CH2 SEC1 ",1.1f,0.0f));
+        COURSE_HAS_CHAPTER(new Course(7,"COM203","Communication and Speeches","20","Walaa Harb"),
+                new Chapter("CH7 SEC1 ",1.3f,0.0f));
+        COURSE_HAS_CHAPTER(new Course(8,"COM203","Communication and Speeches","20","Walaa Harb"),
+                new Chapter("CH3 SEC1+SEC2 ",2.0f,0.0f));
+
+    }
+
+    public void setcur_course_name(String c_name){
+        SQLiteDatabase db_main = this.getWritableDatabase();
+        ContentValues cv_main = new ContentValues();
+        cv_main.put("CUR_COURSE_NAME", c_name);
+        long insert = db_main.insert("CUR_TABLE", null, cv_main);
+    }
+
+    public String getcur_course_name() {
+
+        String queryString = "SELECT * FROM CUR_TABLE";
+        SQLiteDatabase db = this.getReadableDatabase();
+        int i = 0;
+        Cursor cursor = db.rawQuery(queryString, null);
+        String cur_name="";
+        if (cursor.moveToFirst()) {
+            do {
+                 cur_name = cursor.getString(1);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        return cur_name;
     }
 
     public ArrayList<String> getallcourses() {
@@ -256,6 +331,24 @@ public class Database extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return goal;
+    }
+
+    public ArrayList<String> getcourse_chapters() {
+        String coursename=getcur_course_name();
+        ArrayList<String> list = new ArrayList<String>();
+        String queryString = "SELECT * FROM " + COURSE_HAS_CHAPTER_TABLE + " WHERE C_NAME='" + coursename + "';";
+        SQLiteDatabase db = this.getReadableDatabase();
+        int i = 0;
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                String chapter_name = cursor.getString(5);
+                list.add(chapter_name);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        return list;
     }
 
 
@@ -370,7 +463,6 @@ public class Database extends SQLiteOpenHelper {
 
         if (cursor2.moveToFirst()) {
             do {
-
                 chapter_name = cursor2.getString(1);
                 if (chapter_name.equalsIgnoreCase(chapter.getCHAPTER_NAME())) {
                     break;
@@ -385,7 +477,7 @@ public class Database extends SQLiteOpenHelper {
 
             ContentValues cvv = new ContentValues();
 
-
+            cvv.put("ID",course.getID());
             cvv.put(C_NAME, course.getC_NAME());
             cvv.put(C_TITLE, course.getC_TITLE());
             cvv.put(C_SECTION, course.getC_SECTION());

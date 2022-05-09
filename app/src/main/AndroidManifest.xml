@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SEApplication">
         <activity
+            android:name=".Course_Content"
+            android:exported="false" />
+        <activity
             android:name=".status1"
             android:exported="false" />
         <activity

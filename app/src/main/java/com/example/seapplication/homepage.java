@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -34,7 +35,22 @@ Database DB=new Database(homepage.this);
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(this,  R.layout.activity_rowsforlistview, R.id.list_item,names);
 lv.setAdapter(itemsAdapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                    if(position< names.size()){
+                        DB.setcur_course_name(names.get(position).toString());
+                    openCourseConetent(view);}
+//                if(position==1)
+//                    openGoals(view);
+//                if(position==2)
+//                    openStatuspage(view);
+            }
+
+        });
 
 
         Menu.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +70,10 @@ lv.setAdapter(itemsAdapter);
     }
 
 
-
+    public void  openCourseConetent(View v){
+        Intent i= new Intent(this, Course_Content.class);
+        startActivity(i);
+    }
 
 
 
