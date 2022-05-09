@@ -49,7 +49,7 @@ public class Goals extends AppCompatActivity {
         Menu = findViewById(R.id.menu_button2);
         Signout = findViewById(R.id.sign_out_button2);
         add_new_goal = findViewById(R.id.addnewgoal);
-       // alertview=(TextView) findViewById(R.id.Alert_to_delete);
+        // alertview=(TextView) findViewById(R.id.Alert_to_delete);
         lv = (ListView) findViewById(R.id.goalslistview1);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -74,7 +74,7 @@ public class Goals extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              int index=position;
+                int index=position;
                 i++;
                 //oast.makeText(Goals.this, goalss.get(index)+ " ", Toast.LENGTH_SHORT).show();
                 Handler handler=new Handler();
@@ -100,7 +100,7 @@ public class Goals extends AppCompatActivity {
                             builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                   // alertview.setVisibility(View.VISIBLE);
+                                    // alertview.setVisibility(View.VISIBLE);
                                     DB.AccomplishGoal(goalss.get(index).toString());
                                     Toast.makeText(Goals.this, "YAYYY", Toast.LENGTH_SHORT).show();
 
@@ -120,7 +120,7 @@ public class Goals extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-               // openMenupage(v);
+                // openMenupage(v);
 
 
             }

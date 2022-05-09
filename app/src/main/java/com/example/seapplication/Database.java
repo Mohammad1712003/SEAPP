@@ -30,9 +30,11 @@ public class Database extends SQLiteOpenHelper {
         String createGoals_Table = "CREATE TABLE " + GOALS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + GOAL_NAME + " TEXT, " + COURSE_NAME + " TEXT, " + DURATION + " INTEGER)";
         sqLiteDatabase.execSQL(createGoals_Table);
 
-//        String createGoals_Table = "CREATE TABLE " + GOALS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + GOAL_NAME + " TEXT, " + COURSE_NAME + " TEXT, " + DURATION + " INTEGER)";
-//        sqLiteDatabase.execSQL(createGoals_Table);
+        String createChapters_Table = "CREATE TABLE " + CHAPTERS_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + CHAPTER_NAME + " TEXT UNIQUE, " + REQUIRED_NB_OF_HOURS + " FLOAT, " + NB_OF_STUDIED_HOURS + " FLOAT)";
+        sqLiteDatabase.execSQL(createChapters_Table);
 
+        String createCOURSES_HAS_CHAPTER_Table = "CREATE TABLE " + COURSE_HAS_CHAPTER_TABLE + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + C_NAME + " TEXT UNIQUE, " + C_TITLE + " TEXT, " + C_SECTION + " TEXT," + I_NAME + " TEXT, " + CHAPTER_NAME + " TEXT UNIQUE, " + REQUIRED_NB_OF_HOURS + " FLOAT, " + NB_OF_STUDIED_HOURS + " FLOAT)";
+        sqLiteDatabase.execSQL(createCOURSES_HAS_CHAPTER_Table);
     }
 
     //ACC TABLE
@@ -54,12 +56,21 @@ public class Database extends SQLiteOpenHelper {
     public static final String COURSE_NAME = "COURSE_NAME";
     public static final String DURATION = "DURATION";
 
+    //CHPATERS TABLE
+    public static final String CHAPTERS_TABLE = "CHAPTERS_TABLE";
+    public static final String CHAPTER_NAME = "CHAPTER_NAME";
+    public static final String REQUIRED_NB_OF_HOURS = "REQUIRED_NB_OF_HOURS";
+    public static final String NB_OF_STUDIED_HOURS = "NB_OF_STUDIED_HOURS";
+
+    //CHPATERS TABLE
+    public static final String COURSE_HAS_CHAPTER_TABLE = "COURSE_HAS_CHAPTER_TABLE";
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
 
+    // INITIALIZER(add some data at the beg of the app)
     public void Initializer() {
         //add some accounts to the database when  creating the app
         SQLiteDatabase db_main = this.getWritableDatabase();
@@ -141,7 +152,71 @@ public class Database extends SQLiteOpenHelper {
         cv_main2.put(COURSE_NAME, "CSC447");
         cv_main2.put(DURATION, 3);
         insert = db_main.insert(GOALS_TABLE, null, cv_main2);
+        //*********************************************************************************//
 
+        //ADD SOME CHAPTERS TO THE DB
+
+        ContentValues cv_main3 = new ContentValues();
+        cv_main3.put("ID", 1);
+        cv_main3.put(CHAPTER_NAME, "CH1 SEC1 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.0);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 2);
+        cv_main3.put(CHAPTER_NAME, "CH1 SEC2 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.5);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 3);
+        cv_main3.put(CHAPTER_NAME, "CH2 SEC1 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.1);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 4);
+        cv_main3.put(CHAPTER_NAME, "CH2 SEC2 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.6);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 5);
+        cv_main3.put(CHAPTER_NAME, "CH3 SEC1+SEC2 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 2.0);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 6);
+        cv_main3.put(CHAPTER_NAME, "CH7 SEC1 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.3);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 7);
+        cv_main3.put(CHAPTER_NAME, "CH8 SEC1+SEC2 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 2.0);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 8);
+        cv_main3.put(CHAPTER_NAME, "CH10 FULL ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.2);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+        cv_main3.put("ID", 9);
+        cv_main3.put(CHAPTER_NAME, "CH20 FULL ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.0);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
+
+
+        cv_main3.put("ID", 10);
+        cv_main3.put(CHAPTER_NAME, "CH31 SEC1 ");
+        cv_main3.put(REQUIRED_NB_OF_HOURS, 1.3);
+        cv_main3.put(NB_OF_STUDIED_HOURS, 0.0);
+        insert = db_main.insert(CHAPTERS_TABLE, null, cv_main3);
     }
 
     public ArrayList<String> getallcourses() {
@@ -175,7 +250,7 @@ public class Database extends SQLiteOpenHelper {
                 int cur_duration = Integer.parseInt(cursor.getString(3));
 
                 GOAL_CLASS g = new GOAL_CLASS(cur_name, cur_c_name, cur_duration);
-                goal.add(new GOAL_CLASS(cur_name,cur_c_name,cur_duration));
+                goal.add(new GOAL_CLASS(cur_name, cur_c_name, cur_duration));
 
                 i++;
             } while (cursor.moveToNext());
@@ -196,14 +271,14 @@ public class Database extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean AccomplishGoal( String toString){
+    public boolean AccomplishGoal(String toString) {
 
-        ArrayList<GOAL_CLASS> arrayList=getallGoals();
+        ArrayList<GOAL_CLASS> arrayList = getallGoals();
         GOAL_CLASS g;
-        int index=-1;
-        for(int i=0;i<arrayList.size();i++){
-            if(arrayList.get(i).toString().equals(toString)){
-                index=i;
+        int index = -1;
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).toString().equals(toString)) {
+                index = i;
                 break;
             }
         }
@@ -217,14 +292,14 @@ public class Database extends SQLiteOpenHelper {
         else
             return false;
         */
-    /////////////////
+        /////////////////
 
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues cvcc=new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cvcc = new ContentValues();
         index++;
-        long del=db.delete(GOALS_TABLE, "ID=?" , new String[]{index+""});
+        long del = db.delete(GOALS_TABLE, "ID=?", new String[]{index + ""});
 
-        if(del==-1)
+        if (del == -1)
             return false;
         else
             return true;
@@ -263,6 +338,68 @@ public class Database extends SQLiteOpenHelper {
         return false;
 
     }
+
+
+    public void COURSE_HAS_CHAPTER(Course course, Chapter chapter) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        // make sure that the course inputted exists in th DB
+        String queryString = "SELECT * FROM " + COURSES_TABLE;
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery(queryString, null);
+
+
+        String course_name = "";
+        if (cursor.moveToFirst()) {
+            do {
+                course_name = cursor.getString(1);
+
+                if (course_name.equalsIgnoreCase(course.getC_NAME())) {
+                    break;
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // make sure that the chapter inputted exists in the DB
+        String queryString2 = "SELECT * FROM " + CHAPTERS_TABLE;
+        SQLiteDatabase DBB = this.getReadableDatabase();
+        Cursor cursor2 = DBB.rawQuery(queryString2, null);
+
+        String chapter_name = "";
+
+        if (cursor2.moveToFirst()) {
+            do {
+
+                chapter_name = cursor2.getString(1);
+                if (chapter_name.equalsIgnoreCase(chapter.getCHAPTER_NAME())) {
+                    break;
+                }
+
+            } while (cursor2.moveToNext());
+        }
+        if ((course_name.equalsIgnoreCase(course.getC_NAME())) && chapter_name.equalsIgnoreCase(chapter.getCHAPTER_NAME())) {
+            Cursor cursor3 = DB.rawQuery(queryString2, null);
+            ContentValues cvvv = new ContentValues();
+
+
+            ContentValues cvv = new ContentValues();
+
+
+            cvv.put(C_NAME, course.getC_NAME());
+            cvv.put(C_TITLE, course.getC_TITLE());
+            cvv.put(C_SECTION, course.getC_SECTION());
+            cvv.put(I_NAME, course.getI_NAME());
+            cvv.put(CHAPTER_NAME, chapter.getCHAPTER_NAME());
+            cvv.put(REQUIRED_NB_OF_HOURS, chapter.getREQUIRED_NB_OF_HOURS());
+            cvv.put(NB_OF_STUDIED_HOURS, chapter.getNB_OF_STUDIED_HOURS());
+
+            db.insert(COURSE_HAS_CHAPTER_TABLE, null, cvv);
+
+        }
+
+    }
+
 }
 
 
