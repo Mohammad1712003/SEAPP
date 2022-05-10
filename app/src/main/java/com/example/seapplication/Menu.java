@@ -12,15 +12,14 @@ import android.widget.ListView;
 
 public class Menu extends AppCompatActivity {
 ListView lv;
-String[] Menu={"My Courses","My Goals","My Status"};
-Button Signout;
+String[] Menu={"My Courses","My Goals","Sign out"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         setTitle("Menu");
         lv=(ListView) findViewById(R.id.listviewmenu);
-        Signout=findViewById(R.id.sign_out_button4);
         ArrayAdapter<String> itemsAdapter =
                 new ArrayAdapter<String>(this,  R.layout.activity_rowsforlistview,  R.id.list_item,Menu);
         lv.setAdapter(itemsAdapter);
@@ -34,18 +33,18 @@ Button Signout;
                 if(position==1)
                     openGoals(view);
                 if(position==2)
-                    openStatuspage(view);
+                    openSigninpage(view);
             }
 
         });
 
-        Signout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                openSigninpage(v);
-
-            }});
+//        Signout.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                openSigninpage(v);
+//
+//            }});
     }
 
 

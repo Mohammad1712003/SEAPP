@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Course_Content extends AppCompatActivity {
     ListView lv;
-    Button Signout,Menu;
+    Button Menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,6 @@ public class Course_Content extends AppCompatActivity {
         Database DB = new Database(Course_Content.this);
         setTitle(DB.getcur_course_name());
         lv=(ListView) findViewById(R.id.chapters_list_view);
-        Signout=findViewById(R.id.sign_out_button5);
         Menu=findViewById(R.id.menu_button4);
 
        ArrayList chapters=DB.getcourse_chapters();
@@ -41,6 +40,7 @@ public class Course_Content extends AppCompatActivity {
                 if(!(starting_letter.charAt(0) =='T') && !(starting_letter.charAt(1)=='h') && !(starting_letter.charAt(2)=='e'))
                 {
                     if(position<chapters.size()){
+                        DB.setcur_chapter(chapters.get(position).toString());
                         openStatus(view);
                     }
                 }
@@ -51,13 +51,7 @@ public class Course_Content extends AppCompatActivity {
 
 
 
-        Signout.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                openSigninpage(v);
-
-            }});
 
         Menu.setOnClickListener(new View.OnClickListener() {
 

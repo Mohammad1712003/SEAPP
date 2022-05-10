@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class homepage extends AppCompatActivity {
 ListView lv;
-Button Menu,Signout;
+Button Menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ Button Menu,Signout;
         setTitle("My Courses");
 
        Menu=findViewById(R.id.menu_button);
-       Signout=findViewById(R.id.sign_out_button);
+
 
 
 
@@ -60,13 +60,7 @@ lv.setAdapter(itemsAdapter);
             openMenupage(v);
             }});
 
-        Signout.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-              openSigninpage(v);
-
-            }});
     }
 
 

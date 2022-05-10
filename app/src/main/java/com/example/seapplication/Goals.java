@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Goals extends AppCompatActivity {
     FloatingActionButton add_new_goal;
     ListView lv;
-    Button Menu, Signout;
+    Button Menu;
     int i=0;
     TextView alertview;
 
@@ -47,7 +47,7 @@ public class Goals extends AppCompatActivity {
 
 
         Menu = findViewById(R.id.menu_button2);
-        Signout = findViewById(R.id.sign_out_button2);
+
         add_new_goal = findViewById(R.id.addnewgoal);
         // alertview=(TextView) findViewById(R.id.Alert_to_delete);
         lv = (ListView) findViewById(R.id.goalslistview1);
@@ -126,14 +126,7 @@ public class Goals extends AppCompatActivity {
             }
         });
 
-        Signout.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                openSigninpage(v);
-
-            }
-        });
 
         add_new_goal.setOnClickListener(new View.OnClickListener() {
 

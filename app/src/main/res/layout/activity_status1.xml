@@ -113,7 +113,7 @@
     app:layout_constraintEnd_toEndOf="@+id/average"
     app:layout_constraintStart_toStartOf="@+id/average"
     app:layout_constraintTop_toTopOf="@+id/average"
-    android:text="100%"/>
+    android:text="%"/>
 
     <TextView
         android:id="@+id/specifiedText"
